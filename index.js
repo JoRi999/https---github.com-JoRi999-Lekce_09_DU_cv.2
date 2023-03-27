@@ -4,48 +4,27 @@ let user = {
 	nameU: 'Bartoloměj',
 }
 
-let {email, password, nameU} = user 
-
 let formElm = document.querySelector('#registration')
+let emailInput = document.querySelector('#email')
+let passwordInput = document.querySelector('#password')
+let warningElm = document.querySelector('.warning')
 
-    formElm.addEventListener('submit', (event) => {
-        
-        event.preventDefault()
 
-        let emailInput = document.querySelector('#email')
-        let email = emailInput.value
-        let passwordInput = document.querySelector('#password')
-        let password = passwordInput.value
+formElm.addEventListener('submit', (event) => {
+    
+    event.preventDefault()
+    let email = emailInput.value
+    let password = passwordInput.value
 
-    if (email === 'bartolomej.rozumbrada@gmail.com' && password === 'vimzenicnevim') {
+    if (email === user.email && password === user.password) {
 
-        let form = document.getElementById("registration")
-        form.remove()
+        formElm.remove()
         document.write("Přihlášený uživatel: Bartoloměj")
-    }
-    else if (email !== 'bartolomej.rozumbrada@gmail.com' && password !== 'vimzenicnevim'){
-        let para = document.createElement("p")
-        let node = document.createTextNode("Neplatné přihlašovací údaje")
-        para.appendChild(node)
-        para.style.color = "red"
 
-        let form = document.getElementById("registration")
-        form.appendChild(para)
-        
-       /* function clearInput(){
-            let getValue = document.getElementById(password)
-                if (getValue.value !=="")
-                    getValue.value = ""
-        }
-        */
-       
-        
+    }
+    else {
+        warningElm.textContent = "Neplatné přihlašovací údaje"
+        passwordInput.value = ""
     }
 })
 
-
-/*
-
-Nemůžu přijít na to, jak vymazat hodnotu z políčka e-mail, pokud je neplatný. Nejnadějněji mi připadala funkce clearInput() - zakomentovaná, ale nefunguje.
-
-*/
